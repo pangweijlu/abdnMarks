@@ -14,6 +14,7 @@ def convertI(i):
 metadatafile=sys.argv[1]
 
 #start by reading metadata file. Format for each row is filename, start line, number of students. There also needs to be a header line (first line) with text in first 4 cells of row saying "Filename" "Start row" "Number of students" and "Marks column". The last cell should say "Short name" and encodes the abbreviated name for the course which will appear on the graphs.
+print("Reading metadata file ",metadatafile)
 md=pandas.read_excel(metadatafile,sheet_name=0,header=0,index_col=0)
 
 df=pandas.DataFrame()
@@ -52,5 +53,6 @@ for c in df.columns:
         plt.savefig(c+".pdf")
 
 plt.clf()
+seaborn.set_context("notebook",font_scale=0.5)
 seaborn.violinplot(data=df,cut=0,fontsize=8)
 plt.savefig("comparisonPlot.pdf")
